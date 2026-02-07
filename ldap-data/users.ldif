@@ -1,7 +1,13 @@
+# Base structure
 dn: ou=Users,dc=company,dc=com
 objectClass: organizationalUnit
 ou: Users
 
+dn: ou=Groups,dc=company,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+# USERS
 dn: cn=John Doe,ou=Users,dc=company,dc=com
 objectClass: inetOrgPerson
 cn: John Doe
@@ -26,29 +32,449 @@ uid: bwilson
 mail: bwilson@company.com
 userPassword: changeme
 
-dn: ou=Groups,dc=company,dc=com
-objectClass: organizationalUnit
-ou: Groups
+dn: cn=Carol Martinez,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: Carol Martinez
+sn: Martinez
+uid: cmartinez
+mail: cmartinez@company.com
+userPassword: changeme
 
-dn: cn=Domain Admins,ou=Groups,dc=company,dc=com
+dn: cn=David Chen,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: David Chen
+sn: Chen
+uid: dchen
+mail: dchen@company.com
+userPassword: changeme
+
+dn: cn=Emma Johnson,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: Emma Johnson
+sn: Johnson
+uid: ejohnson
+mail: ejohnson@company.com
+userPassword: changeme
+
+# GROUPS with random assignments
+
+dn: cn=AP-AWS-Admin,ou=Groups,dc=company,dc=com
 objectClass: groupOfNames
-cn: Domain Admins
+cn: AP-AWS-Admin
 member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
 
-dn: cn=IT Staff,ou=Groups,dc=company,dc=com
+dn: cn=AP-AWS-Billing-Read,ou=Groups,dc=company,dc=com
 objectClass: groupOfNames
-cn: IT Staff
+cn: AP-AWS-Billing-Read
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Azure-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Azure-Read
 member: cn=John Doe,ou=Users,dc=company,dc=com
 member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
 
-dn: cn=VPN Users,ou=Groups,dc=company,dc=com
+dn: cn=AP-Azure-Admin,ou=Groups,dc=company,dc=com
 objectClass: groupOfNames
-cn: VPN Users
+cn: AP-Azure-Admin
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-GCP-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-GCP-Read
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Kubernetes-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Kubernetes-Admin
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Kubernetes-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Kubernetes-Read
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Docker-Deploy,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Docker-Deploy
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Jenkins-Deploy,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Jenkins-Deploy
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Jenkins-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Jenkins-Admin
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-GitHub-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-GitHub-Admin
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-GitHub-Write,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-GitHub-Write
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Bitbucket-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Bitbucket-Read
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Bitbucket-Write,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Bitbucket-Write
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Artifactory-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Artifactory-Read
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Artifactory-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Artifactory-Admin
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Terraform-Execute,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Terraform-Execute
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Ansible-Run,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Ansible-Run
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Database-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Database-Read
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Database-Write,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Database-Write
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Database-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Database-Admin
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Oracle-Reporting,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Oracle-Reporting
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-SQLServer-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-SQLServer-Admin
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Analytics-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Analytics-Read
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Analytics-Write,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Analytics-Write
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Reporting-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Reporting-Admin
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-PowerBI-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-PowerBI-User
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Tableau-Viewer,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Tableau-Viewer
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Salesforce-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Salesforce-User
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Salesforce-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Salesforce-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-ServiceNow-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-ServiceNow-User
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
 member: cn=John Doe,ou=Users,dc=company,dc=com
 member: cn=Alice Smith,ou=Users,dc=company,dc=com
 member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
 
-dn: cn=Finance,ou=Groups,dc=company,dc=com
+dn: cn=AP-ServiceNow-Admin,ou=Groups,dc=company,dc=com
 objectClass: groupOfNames
-cn: Finance
+cn: AP-ServiceNow-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-VPN-Access,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-VPN-Access
+member: cn=John Doe,ou=Users,dc=company,dc=com
 member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-SSO-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-SSO-User
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-SSO-Audit,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-SSO-Audit
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Okta-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Okta-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Splunk-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Splunk-Read
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Splunk-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Splunk-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Compliance-Review,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Compliance-Review
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Audit-Logs-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Audit-Logs-Read
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Security-Incident-Response,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Security-Incident-Response
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Finance-Reporting,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Finance-Reporting
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Finance-Approve,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Finance-Approve
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Payments-Processor,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Payments-Processor
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Payments-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Payments-Admin
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Risk-Analysis,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Risk-Analysis
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Risk-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Risk-Admin
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-TradeOps-Execute,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-TradeOps-Execute
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+
+dn: cn=AP-TradeOps-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-TradeOps-Read
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-CRM-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-CRM-User
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-CRM-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-CRM-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-HR-Portal-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-HR-Portal-User
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-HR-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-HR-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+
+dn: cn=AP-DocumentMgmt-Read,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-DocumentMgmt-Read
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-DocumentMgmt-Write,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-DocumentMgmt-Write
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Email-Gateway-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Email-Gateway-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Exchange-User,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Exchange-User
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-SharePoint-Contributor,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-SharePoint-Contributor
+member: cn=Emma Johnson,ou=Users,dc=company,dc=com
+member: cn=Carol Martinez,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=AP-SharePoint-Admin,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-SharePoint-Admin
+member: cn=David Chen,ou=Users,dc=company,dc=com
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=AP-Backup-Restore,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: AP-Backup-Restore
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=David Chen,ou=Users,dc=company,dc=com

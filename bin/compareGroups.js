@@ -22,7 +22,7 @@ const run = async () => {
           message: "Enter your SSO password",
         },
       ]);
-      
+
       const { username, password } = responses;
       if (!(username && password)) {
         console.log("Username and password are required");
@@ -30,9 +30,9 @@ const run = async () => {
       }
 
       const results = await getLDAPInParallel(username, password, sso);
-      
+
       if (sso.length === 1) {
-        console.log('Groups:', results[0]);
+        console.log("Groups:", results[0]);
       } else {
         const processedResults = results.map((stdout, index) => {
           return {
@@ -41,32 +41,38 @@ const run = async () => {
               .split("\n")
               .filter(Boolean)
               .map((element) => {
-                return element.split("CN=")[1];
+                // Extract group name after cn= or CN= (case insensitive)
+                const match = element.match(/cn=(.+)/i);
+                return match ? match[1] : null;
               })
-              .filter((element) => !element.endsWith(sso[index]))
+              .filter(Boolean) // Remove null values
+              .filter((element) => {
+                // Remove entries that end with the SSO username
+                const currentSso = sso[index];
+                return currentSso
+                  ? !element.toLowerCase().endsWith(currentSso.toLowerCase())
+                  : true;
+              }),
           };
         });
-        
+
         if (sso.length === 2) {
-          compare.compare(
-            processedResults[0], 
-            processedResults[1]
-          );
+          compare.compare(processedResults[0], processedResults[1]);
         }
-        
+
         if (sso.length > 2) {
           console.log("Comparing more than 2 users:");
           const table = processedResults
             .map((element) => {
               return {
-                [element.sso]: element.groups
+                [element.sso]: element.groups,
               };
             })
             .filter((element) => {
               const key = Object.keys(element)[0];
-              return element[key].length > 2;
+              return element[key] && element[key].length > 0;
             });
-          
+
           console.table(table);
         }
       }
