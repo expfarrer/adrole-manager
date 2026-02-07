@@ -1,0 +1,54 @@
+dn: ou=Users,dc=company,dc=com
+objectClass: organizationalUnit
+ou: Users
+
+dn: cn=John Doe,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: John Doe
+sn: Doe
+uid: jdoe
+mail: jdoe@company.com
+userPassword: changeme
+
+dn: cn=Alice Smith,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: Alice Smith
+sn: Smith
+uid: asmith
+mail: asmith@company.com
+userPassword: changeme
+
+dn: cn=Bob Wilson,ou=Users,dc=company,dc=com
+objectClass: inetOrgPerson
+cn: Bob Wilson
+sn: Wilson
+uid: bwilson
+mail: bwilson@company.com
+userPassword: changeme
+
+dn: ou=Groups,dc=company,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=Domain Admins,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: Domain Admins
+member: cn=John Doe,ou=Users,dc=company,dc=com
+
+dn: cn=IT Staff,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: IT Staff
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=VPN Users,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: VPN Users
+member: cn=John Doe,ou=Users,dc=company,dc=com
+member: cn=Alice Smith,ou=Users,dc=company,dc=com
+member: cn=Bob Wilson,ou=Users,dc=company,dc=com
+
+dn: cn=Finance,ou=Groups,dc=company,dc=com
+objectClass: groupOfNames
+cn: Finance
+member: cn=Alice Smith,ou=Users,dc=company,dc=com

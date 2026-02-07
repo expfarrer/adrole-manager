@@ -1,0 +1,19 @@
+{
+  "name": "@dxp-public/compare-ad-groups",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "author": "Adams, Branden <Branden.Adams@ampf.com>",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "ldapjs": "^3.0.7",
+    "prompts": "^2.4.2"
+  },
+  "scripts": {
+    "get-ad-groups": "yarn node ./bin/compareGroups.js",
+    "get-ad-group-members": "yarn node ./bin/getGroupMembers.js"
+  },
+  "bin": {
+    "get-ad-groups": "./bin/compareGroups.js",
+    "get-ad-group-members": "./bin/getGroupMembers.js"
+  }
+}
