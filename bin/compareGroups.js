@@ -10,6 +10,18 @@ const run = async () => {
     .description("SSO ID(s) to process")
     .argument("<sso...>")
     .action(async (sso) => {
+      // Check max limit
+      if (sso.length > 5) {
+        console.error(`\n❌ Error: Maximum 5 users can be compared at once.`);
+        console.error(
+          `   You requested ${sso.length} users: ${sso.join(", ")}`,
+        );
+        console.error(
+          `\n💡 Tip: Try comparing smaller groups or run multiple comparisons.\n`,
+        );
+        process.exit(1);
+      }
+
       const responses = await prompts([
         {
           type: "text",
@@ -61,24 +73,102 @@ const run = async () => {
         }
 
         if (sso.length > 2) {
-          console.log("Comparing more than 2 users:");
-          const table = processedResults
-            .map((element) => {
-              return {
-                [element.sso]: element.groups,
-              };
-            })
-            .filter((element) => {
-              const key = Object.keys(element)[0];
-              return element[key] && element[key].length > 0;
-            });
-
-          console.table(table);
+          displayMultiColumnComparison(processedResults);
         }
       }
     });
 
   program.parse(process.argv);
 };
+
+function displayMultiColumnComparison(processedResults) {
+  console.log("\n");
+
+  // Find roles shared by ALL users
+  const allGroups = processedResults.map((r) => new Set(r.groups));
+  const sharedByAll = processedResults[0].groups.filter((group) =>
+    allGroups.every((userGroups) => userGroups.has(group)),
+  );
+
+  // Calculate unique roles for each user
+  const userUniqueRoles = processedResults.map((user, index) => {
+    const otherUsersGroups = new Set();
+    processedResults.forEach((otherUser, otherIndex) => {
+      if (otherIndex !== index) {
+        otherUser.groups.forEach((g) => otherUsersGroups.add(g));
+      }
+    });
+
+    return {
+      sso: user.sso,
+      totalRoles: user.groups.length,
+      uniqueRoles: user.groups.filter((g) => !otherUsersGroups.has(g)),
+      allRoles: user.groups,
+    };
+  });
+
+  // Column width optimized for up to 5 users
+  const colWidth = 28;
+  const separator = "─".repeat(colWidth);
+  const topBorder = "┌" + processedResults.map(() => separator).join("┬") + "┐";
+  const midBorder = "├" + processedResults.map(() => separator).join("┼") + "┤";
+  const bottomBorder =
+    "└" + processedResults.map(() => separator).join("┴") + "┘";
+
+  console.log(topBorder);
+
+  // Print user headers with unique count
+  const headers = userUniqueRoles.map((u) =>
+    `${u.sso} (${u.uniqueRoles.length} unique)`.padEnd(colWidth - 2),
+  );
+  console.log("│ " + headers.join(" │ ") + " │");
+  console.log(midBorder);
+
+  // Print unique roles in columns
+  const maxUniqueRoles = Math.max(
+    ...userUniqueRoles.map((u) => u.uniqueRoles.length),
+  );
+
+  for (let i = 0; i < maxUniqueRoles; i++) {
+    const row = userUniqueRoles.map((u) => {
+      const role = u.uniqueRoles[i] || "";
+      return role.padEnd(colWidth - 2);
+    });
+    console.log("│ " + row.join(" │ ") + " │");
+  }
+
+  console.log(bottomBorder);
+
+  // Print shared roles section
+  if (sharedByAll.length > 0) {
+    console.log(
+      `\n🔗 Shared by ALL ${processedResults.length} users (${sharedByAll.length} roles):`,
+    );
+    console.log("═".repeat(80));
+
+    // Print in 2 columns for better readability
+    const sharedSorted = sharedByAll.sort();
+    const halfWay = Math.ceil(sharedSorted.length / 2);
+    const col1 = sharedSorted.slice(0, halfWay);
+    const col2 = sharedSorted.slice(halfWay);
+
+    for (let i = 0; i < col1.length; i++) {
+      const left = `  • ${col1[i]}`.padEnd(45);
+      const right = col2[i] ? `  • ${col2[i]}` : "";
+      console.log(left + right);
+    }
+  }
+
+  // Print summary statistics
+  console.log("\n📊 Summary:");
+  console.log("═".repeat(80));
+  userUniqueRoles.forEach((u) => {
+    const sharedCount = u.totalRoles - u.uniqueRoles.length;
+    console.log(
+      `  ${u.sso.padEnd(15)} Total: ${u.totalRoles.toString().padStart(2)}  |  Unique: ${u.uniqueRoles.length.toString().padStart(2)}  |  Shared: ${sharedCount.toString().padStart(2)}`,
+    );
+  });
+  console.log("\n");
+}
 
 run();
