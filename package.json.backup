@@ -8,17 +8,12 @@
     "ldapjs": "^3.0.7",
     "prompts": "^2.4.2"
   },
+  "scripts": {
+    "get-ad-groups": "yarn node ./bin/compareGroups.js",
+    "get-ad-group-members": "yarn node ./bin/getGroupMembers.js"
+  },
   "bin": {
     "get-ad-groups": "./bin/compareGroups.js",
     "get-ad-group-members": "./bin/getGroupMembers.js"
-  },
-  "scripts": {
-    "get-ad-groups": "yarn node ./bin/compareGroups.js",
-    "get-ad-group-members": "yarn node ./bin/getGroupMembers.js",
-    "team-summary": "node ./bin/teamSummary.js",
-    "features": "node ./bin/features.js",
-    "commands": "node ./bin/commands.js",
-    "test": "./tests/e2e-test.sh",
-    "test:watch": "watch -n 5 ./tests/e2e-test.sh"
   }
 }

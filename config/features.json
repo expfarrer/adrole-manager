@@ -1,0 +1,28 @@
+{
+  "features": {
+    "team-summary": {
+      "enabled": true,
+      "version": "1.1.0",
+      "description": "Team access analysis and reporting",
+      "commands": ["team-summary"]
+    },
+    "compliance": {
+      "enabled": false,
+      "version": "1.3.0",
+      "description": "Compliance checking and audit reports",
+      "commands": ["audit-compliance", "snapshot", "diff-snapshot"]
+    },
+    "onboarding": {
+      "enabled": false,
+      "version": "1.2.0",
+      "description": "Onboarding and offboarding helpers",
+      "commands": ["access-report", "onboard-compare"]
+    },
+    "export": {
+      "enabled": false,
+      "version": "1.4.0",
+      "description": "Multi-format data export",
+      "commands": ["export"]
+    }
+  }
+}
